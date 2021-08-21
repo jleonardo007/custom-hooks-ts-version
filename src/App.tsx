@@ -1,3 +1,22 @@
+import TimerDisplay from "components/timer-display";
+import TimerControls from "components/timer-controls";
+import useTimer from "hooks/use-timer";
+import beep from "assets/beep.mp3";
+import { UseTimer } from "types/timer";
+import "app.css";
+
 export default function App() {
-  return <h1>Hello world!!</h1>;
+  const { timer, alarmRef, ...handlers }: UseTimer = useTimer();
+
+  return (
+    <>
+      <section className="timer">
+        <div className="timer-container">
+          <TimerDisplay timer={timer} />
+          <TimerControls timer={timer} handlers={handlers} />
+        </div>
+      </section>
+      <audio ref={alarmRef} src={beep}></audio>
+    </>
+  );
 }
